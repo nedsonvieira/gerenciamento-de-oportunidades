@@ -1,0 +1,66 @@
+<template>
+    <lightning-card title="Oportunidades Recentes" icon-name="standard:opportunity">
+        <lightning-button class="slds-p-right_large" variant="brand" label="Nova Oportunidade" slot="actions"
+            onclick={handleOpenModal}>
+        </lightning-button>
+
+        <div class="slds-p-horizontal_medium slds-p-top_small slds-grid slds-gutters">
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-combobox label="Fase" value={stageFilter} placeholder="Todas" options={stageOptions}
+                    onchange={handleStageChange}>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input type="date" label="Data Inicial" value={startDate}
+                    onchange={handleStartDateChange}></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input type="date" label="Data Final" value={endDate}
+                    onchange={handleEndDateChange}></lightning-input>
+            </div>
+        </div>
+
+        <template if:true={opportunities.length}>
+            <lightning-datatable key-field="Id" data={opportunities} columns={columns} onrowaction={handleRowAction}
+                class="slds-p-around_medium">
+            </lightning-datatable>
+        </template>
+
+        <template if:true={error}>
+            <c-error-panel message={error}></c-error-panel>
+        </template>
+
+        <template if:false={opportunities.length}>
+            <div class="slds-p-around_medium slds-text-color_weak">
+                Nenhuma oportunidade encontrada.
+            </div>
+        </template>
+    </lightning-card>
+
+    <!-- MODAL -->
+    <template if:true={isModalOpen}>
+        <section role="dialog" class="slds-modal slds-fade-in-open slds-backdrop">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-modal__title">Nova Oportunidade</h2>
+                    <lightning-button-icon icon-name="utility:close" variant="bare-inverse"
+                        onclick={handleCloseModal}></lightning-button-icon>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-record-edit-form object-api-name="Opportunity" onsuccess={handleSuccess}>
+                        <lightning-input-field field-name="Name"></lightning-input-field>
+                        <lightning-input-field field-name="StageName"></lightning-input-field>
+                        <lightning-input-field field-name="CloseDate"></lightning-input-field>
+                        <lightning-input-field field-name="Amount"></lightning-input-field>
+                        <div class="slds-m-top_medium slds-grid slds-grid_align-end">
+                            <lightning-button variant="neutral" label="Cancelar"
+                                onclick={handleDismiss}></lightning-button>
+                            <lightning-button class="slds-m-left_medium" variant="brand" type="submit"
+                                label="Salvar"></lightning-button>
+                        </div>
+                    </lightning-record-edit-form>
+                </div>
+            </div>
+        </section>
+    </template>
+</template>

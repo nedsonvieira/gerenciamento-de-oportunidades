@@ -1,0 +1,49 @@
+<template>
+    <lightning-card title="Dashboard de Oportunidades" icon-name="standard:dashboard">
+        <div class="slds-p-around_medium">
+            <lightning-layout class="slds-grid">
+                <lightning-layout-item class="slds-col slds-align_absolute-center slds-p-right_medium">
+                    <lightning-card class="kpi-label slds-text-align_center" title="Total de Oportunidades"
+                        icon-name="standard:opportunity">
+                        <lightning-formatted-number value={kpi.totalOpps}
+                            format-style="decimal"></lightning-formatted-number>
+                    </lightning-card>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-col slds-align_absolute-center">
+                    <lightning-card class="kpi-label slds-text-align_center" title="Valor Total (R$)"
+                        icon-name="standard:partner_marketing_budget">
+                        <lightning-formatted-number value={kpi.totalAmount} format-style="currency"
+                            currency-code="BRL"></lightning-formatted-number>
+                    </lightning-card>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-col slds-align_absolute-center slds-p-left_medium">
+                    <lightning-card class="kpi-label slds-text-align_center" title="Vendedores Ativos"
+                        icon-name="standard:person_account">
+                        <lightning-formatted-number value={kpi.uniqueOwners}></lightning-formatted-number>
+                    </lightning-card>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+
+        <div class="slds-p-horizontal_medium slds-grid slds-grid_align-spread">
+            <lightning-combobox class="slds-p-horizontal_medium slds-col" label="Período" value={selectedDays}
+                options={dayOptions} onchange={handlePeriodChange}>
+            </lightning-combobox>
+            <lightning-button class="slds-p-horizontal_medium slds-col slds-p-top_large" label="Exportar CSV"
+                icon-name="utility:download" onclick={exportCSV}>
+            </lightning-button>
+        </div>
+
+        <template if:true={isLoading}>
+            <div class="slds-p-around_medium slds-align_absolute-center">
+                <lightning-spinner alternative-text="Carregando gráfico..." size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template if:false={isLoading}>
+            <div class="slds-p-around_medium">
+                <canvas lwc:dom="manual" class="chart"></canvas>
+            </div>
+        </template>
+    </lightning-card>
+</template>
