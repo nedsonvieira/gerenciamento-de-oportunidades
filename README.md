@@ -14,7 +14,7 @@ Este projeto é um aplicativo moderno para Salesforce desenvolvido com **Apex** 
 
 ![Dashboard Screenshot](img/dashboard.png)
 
-[![Apresentação](https://github.com/nedsonvieira/gerenciamento-de-oportunidades/raw/refs/heads/main/img/apresenta%C3%A7%C3%A3o.mp4)]
+[![Apresentação](https://raw.githubusercontent.com/nedsonvieira/gerenciamento-de-oportunidades/main/img/table.png)](https://raw.githubusercontent.com/nedsonvieira/gerenciamento-de-oportunidades/main/img/img/apresentação.mp4)
 
 ## 🧩 Componentes do Projeto
 
