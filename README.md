@@ -1,4 +1,4 @@
-# Salesforce Oportunidades - App LWC + Apex
+# Visão de Oportunidades com Salesforce - App LWC + Apex
 
 Este projeto é um aplicativo moderno para Salesforce desenvolvido com **Apex** e **Lightning Web Components (LWC)**, com foco na **visualização interativa e gerenciamento de oportunidades de vendas**.
 
